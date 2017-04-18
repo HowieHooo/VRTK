@@ -95,6 +95,11 @@
             return GetControllerSDK().GetControllerModel(controller);
         }
 
+        public static SDK_BaseController.ControllerHand GetControllerModelHand(GameObject controllerModel)
+        {
+            return GetControllerSDK().GetControllerModelHand(controllerModel);
+        }
+
         public static GameObject GetControllerModel(SDK_BaseController.ControllerHand hand)
         {
             return GetControllerSDK().GetControllerModel(hand);
@@ -113,6 +118,11 @@
         public static void HapticPulseOnIndex(uint index, float strength = 0.5f)
         {
             GetControllerSDK().HapticPulseOnIndex(index, strength);
+        }
+
+        public static void HapticPulseOnControllerReference(VRTK_ControllerReference controllerReference, float strength = 0.5f)
+        {
+            GetControllerSDK().HapticPulseOnIndex(controllerReference.index, strength);
         }
 
         public static SDK_ControllerHapticModifiers GetHapticModifiers()

@@ -59,6 +59,7 @@ namespace VRTK
         protected bool rigidBodyForcedActive = false;
         protected Rigidbody touchRigidBody;
         protected Object defaultColliderPrefab;
+        protected VRTK_ControllerReference controllerReference;
 
         public virtual void OnControllerTouchInteractableObject(ObjectInteractEventArgs e)
         {
@@ -195,6 +196,7 @@ namespace VRTK
         {
             VRTK_PlayerObject.SetPlayerObject(gameObject, VRTK_PlayerObject.ObjectTypes.Controller);
             triggerRumble = false;
+            controllerReference = VRTK_ControllerReference.GetControllerReference(gameObject);
             CreateTouchCollider();
             CreateTouchRigidBody();
         }
@@ -326,7 +328,7 @@ namespace VRTK
                 if (doHaptics != null)
                 {
                     triggerRumble = true;
-                    doHaptics.HapticsOnTouch(VRTK_DeviceFinder.GetControllerIndex(gameObject));
+                    doHaptics.HapticsOnTouch(controllerReference);
                     Invoke("ResetTriggerRumble", doHaptics.durationOnTouch);
                 }
             }

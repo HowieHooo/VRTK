@@ -190,6 +190,28 @@ namespace VRTK
         public abstract GameObject GetControllerModel(ControllerHand hand);
 
         /// <summary>
+        /// The GetControllerModelHand method returns the hand for the given controller model GameObject.
+        /// </summary>
+        /// <param name="controllerModel">The controller model GameObject to get the hand for.</param>
+        /// <returns>The hand enum for which the given controller model is for.</returns>
+        public virtual ControllerHand GetControllerModelHand(GameObject controllerModel)
+        {
+            var sdkManager = VRTK_SDKManager.instance;
+            if (sdkManager != null)
+            {
+                if (controllerModel == sdkManager.modelAliasLeftController)
+                {
+                    return ControllerHand.Left;
+                }
+                else if (controllerModel == sdkManager.modelAliasRightController)
+                {
+                    return ControllerHand.Right;
+                }
+            }
+            return ControllerHand.None;
+        }
+
+        /// <summary>
         /// The GetControllerRenderModel method gets the game object that contains the given controller's render model.
         /// </summary>
         /// <param name="controller">The GameObject to check.</param>

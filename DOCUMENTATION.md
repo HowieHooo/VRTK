@@ -3272,10 +3272,10 @@ The Interact Haptics script is attached on the same GameObject as an Interactabl
 
 #### HapticsOnTouch/1
 
-  > `public virtual void HapticsOnTouch(uint controllerIndex)`
+  > `public virtual void HapticsOnTouch(VRTK_ControllerReference controllerReference)`
 
   * Parameters
-   * `uint controllerIndex` - The controller index to activate the haptic feedback on.
+   * `VRTK_ControllerReference controllerReference` - The reference to the controller to activate the haptic feedback on.
   * Returns
    * _none_
 
@@ -3283,10 +3283,10 @@ The HapticsOnTouch method triggers the haptic feedback on the given controller f
 
 #### HapticsOnGrab/1
 
-  > `public virtual void HapticsOnGrab(uint controllerIndex)`
+  > `public virtual void HapticsOnGrab(VRTK_ControllerReference controllerReference)`
 
   * Parameters
-   * `uint controllerIndex` - The controller index to activate the haptic feedback on.
+   * `VRTK_ControllerReference controllerReference` - The reference to the controller to activate the haptic feedback on.
   * Returns
    * _none_
 
@@ -3294,10 +3294,10 @@ The HapticsOnGrab method triggers the haptic feedback on the given controller fo
 
 #### HapticsOnUse/1
 
-  > `public virtual void HapticsOnUse(uint controllerIndex)`
+  > `public virtual void HapticsOnUse(VRTK_ControllerReference controllerReference)`
 
   * Parameters
-   * `uint controllerIndex` - The controller index to activate the haptic feedback on.
+   * `VRTK_ControllerReference controllerReference` - The reference to the controller to activate the haptic feedback on.
   * Returns
    * _none_
 
@@ -6107,9 +6107,10 @@ The IsEditTime method determines if the state of Unity is in the Unity Editor an
 
 #### TriggerHapticPulse/2
 
-  > `public static void TriggerHapticPulse(uint controllerIndex, float strength)`
+  > `public static void TriggerHapticPulse(VRTK_ControllerReference controllerReference, float strength)`
 
   * Parameters
+   * `VRTK_ControllerReference controllerReference` - The reference to the controller to activate the haptic feedback on.
    * `float strength` - The intensity of the rumble of the controller motor. `0` to `1`.
   * Returns
    * _none_
@@ -6118,9 +6119,10 @@ The TriggerHapticPulse/1 method calls a single haptic pulse call on the controll
 
 #### TriggerHapticPulse/4
 
-  > `public static void TriggerHapticPulse(uint controllerIndex, float strength, float duration, float pulseInterval)`
+  > `public static void TriggerHapticPulse(VRTK_ControllerReference controllerReference, float strength, float duration, float pulseInterval)`
 
   * Parameters
+   * `VRTK_ControllerReference controllerReference` - The reference to the controller to activate the haptic feedback on.
    * `float strength` - The intensity of the rumble of the controller motor. `0` to `1`.
    * `float duration` - The length of time the rumble should continue for.
    * `float pulseInterval` - The interval to wait between each haptic pulse.
@@ -7110,6 +7112,17 @@ The GetControllerModel method returns the model alias for the given GameObject.
    * `GameObject` - The GameObject that has the model alias within it.
 
 The GetControllerModel method returns the model alias for the given controller hand.
+
+#### GetControllerModelHand/1
+
+  > `public virtual ControllerHand GetControllerModelHand(GameObject controllerModel)`
+
+  * Parameters
+   * `GameObject controllerModel` - The controller model GameObject to get the hand for.
+  * Returns
+   * `ControllerHand` - The hand enum for which the given controller model is for.
+
+The GetControllerModelHand method returns the hand for the given controller model GameObject.
 
 #### GetControllerRenderModel/1
 

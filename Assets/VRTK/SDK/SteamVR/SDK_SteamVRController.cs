@@ -119,23 +119,26 @@ namespace VRTK
         public override GameObject GetControllerByIndex(uint index, bool actual = false)
         {
             SetTrackedControllerCaches();
-            var sdkManager = VRTK_SDKManager.instance;
-            if (sdkManager != null)
+            if (index < uint.MaxValue)
             {
-                if (cachedLeftTrackedObject != null && (uint)cachedLeftTrackedObject.index == index)
+                var sdkManager = VRTK_SDKManager.instance;
+                if (sdkManager != null)
                 {
-                    return (actual ? sdkManager.actualLeftController : sdkManager.scriptAliasLeftController);
+                    if (cachedLeftTrackedObject != null && (uint)cachedLeftTrackedObject.index == index)
+                    {
+                        return (actual ? sdkManager.actualLeftController : sdkManager.scriptAliasLeftController);
+                    }
+
+                    if (cachedRightTrackedObject != null && (uint)cachedRightTrackedObject.index == index)
+                    {
+                        return (actual ? sdkManager.actualRightController : sdkManager.scriptAliasRightController);
+                    }
                 }
 
-                if (cachedRightTrackedObject != null && (uint)cachedRightTrackedObject.index == index)
+                if (cachedTrackedObjectsByIndex.ContainsKey(index) && cachedTrackedObjectsByIndex[index] != null)
                 {
-                    return (actual ? sdkManager.actualRightController : sdkManager.scriptAliasRightController);
+                    return cachedTrackedObjectsByIndex[index].gameObject;
                 }
-            }
-
-            if (cachedTrackedObjectsByIndex.ContainsKey(index) && cachedTrackedObjectsByIndex[index] != null)
-            {
-                return cachedTrackedObjectsByIndex[index].gameObject;
             }
 
             return null;
@@ -897,6 +900,11 @@ namespace VRTK
             else if (IsControllerRightHand(controller))
             {
                 return cachedRightTrackedObject;
+            }
+
+            if (controller == null)
+            {
+                return null;
             }
 
             if (cachedTrackedObjectsByGameObject.ContainsKey(controller) && cachedTrackedObjectsByGameObject[controller] != null)
